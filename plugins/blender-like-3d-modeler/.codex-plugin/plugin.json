@@ -1,0 +1,34 @@
+{
+  "name": "blender-like-3d-modeler",
+  "version": "0.1.0",
+  "description": "Prompt-and-photo guided 3D model generation workflow scaffold for Codex.",
+  "author": {
+    "name": "[TODO: Author Name]",
+    "email": "[TODO: author@example.com]",
+    "url": "[TODO: https://github.com/author]"
+  },
+  "homepage": "[TODO: https://docs.example.com/blender-like-3d-modeler]",
+  "repository": "[TODO: https://github.com/author/blender-like-3d-modeler]",
+  "license": "[TODO: MIT]",
+  "keywords": ["3d", "blender", "image-to-3d", "mesh"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "apps": "./.app.json",
+  "interface": {
+    "displayName": "Blender-Like 3D Modeler",
+    "shortDescription": "Turns prompts and photos into 3D model job plans.",
+    "longDescription": "Scaffolds a prompt-and-photo 3D modeling workflow for Codex, including a generation skill, backend integration notes, and a starter job-spec script.",
+    "developerName": "[TODO: Developer Name]",
+    "category": "Creative",
+    "capabilities": ["Interactive", "Write"],
+    "websiteURL": "[TODO: https://example.com/blender-like-3d-modeler]",
+    "privacyPolicyURL": "[TODO: https://example.com/privacy]",
+    "termsOfServiceURL": "[TODO: https://example.com/terms]",
+    "defaultPrompt": [
+      "Create a stylized chair from these reference photos.",
+      "Turn this sneaker photo into a textured GLB model.",
+      "Draft a 3D job spec for a game-ready sci-fi helmet."
+    ],
+    "brandColor": "#2F6FED"
+  }
+}

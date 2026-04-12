@@ -1,0 +1,20 @@
+{
+  "name": "krud-landing-local",
+  "interface": {
+    "displayName": "Krud Landing Local Plugins"
+  },
+  "plugins": [
+    {
+      "name": "blender-like-3d-modeler",
+      "source": {
+        "source": "local",
+        "path": "./plugins/blender-like-3d-modeler"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Creative"
+    }
+  ]
+}
