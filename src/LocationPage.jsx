@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import './LocationPage.css'
 
 const locationData = {
@@ -77,10 +78,10 @@ export default function LocationPage({ location }) {
     <div className="location-page">
       <section className="location-hero">
         <header className="location-header">
-          <a className="brand" href="/" aria-label="Sprig & Soil home">
+          <Link className="brand" to="/" aria-label="Sprig & Soil home">
             <span className="brand-mark" aria-hidden="true"></span>
             <span>Sprig & Soil</span>
-          </a>
+          </Link>
         </header>
 
         <div className="location-hero-content">

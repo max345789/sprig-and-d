@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import './App.css'
 
 const products = [
@@ -103,9 +104,9 @@ const faqs = [
 ]
 
 const initialQuantities = Object.fromEntries(products.map((product) => [product.id, 0]))
-const currency = new Intl.NumberFormat('en-US', {
+const currency = new Intl.NumberFormat('en-IN', {
   style: 'currency',
-  currency: 'USD',
+  currency: 'INR',
 })
 
 function formatCurrency(value) {
@@ -181,10 +182,10 @@ function App() {
     <div className="page-shell">
       <section className="hero-section" id="home">
         <header className="site-header">
-          <a className="brand" href="#home" aria-label="Sprig & Soil home">
+          <Link className="brand" to="/" aria-label="Sprig & Soil home">
             <span className="brand-mark" aria-hidden="true"></span>
             <span>Sprig & Soil</span>
-          </a>
+          </Link>
 
           <nav className="site-nav" aria-label="Primary">
             <a href="#areas">Delivery Areas</a>

@@ -53,6 +53,14 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 24px;
+  padding: 12px 24px;
+  background: rgba(12, 21, 16, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  margin-top: 1rem;
 }
 
 .brand {
@@ -403,17 +411,19 @@
   display: grid;
   align-content: start;
   gap: 0.75rem;
-  padding: 1.5rem;
+  padding: 2rem;
   border-radius: 1.5rem;
   background: var(--surface);
-  border: 1px solid var(--line);
-  box-shadow: 0 12px 30px rgba(21, 33, 19, 0.05);
-  transition: transform 180ms ease, box-shadow 180ms ease;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 12px 32px rgba(21, 33, 19, 0.04), inset 0 2px 0 rgba(255,255,255,0.6);
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .area-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 36px rgba(21, 33, 19, 0.09);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 24px 48px rgba(21, 33, 19, 0.08), inset 0 2px 0 rgba(255,255,255,0.8);
 }
 
 .area-card h3 {
@@ -594,20 +604,21 @@
   display: grid;
   grid-template-rows: auto auto 1fr;
   gap: 1rem;
-  padding: 1.4rem 1.45rem 1.5rem;
-  border-radius: 1.8rem;
-  border: 1px solid var(--line);
+  padding: 1.8rem;
+  border-radius: 2rem;
+  border: 1px solid rgba(255,255,255,0.6);
   background: var(--surface);
-  box-shadow: 0 20px 45px rgba(21, 33, 19, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 20px 45px rgba(21, 33, 19, 0.04), inset 0 2px 4px rgba(255,255,255,0.4);
   transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    border-color 180ms ease;
+    transform 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .product:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 24px 50px rgba(21, 33, 19, 0.08);
+  transform: translateY(-6px);
+  box-shadow: 0 32px 64px rgba(21, 33, 19, 0.08), inset 0 2px 4px rgba(255,255,255,0.8);
 }
 
 .product-gold {
@@ -722,11 +733,14 @@
   top: 24px;
   display: grid;
   gap: 1.15rem;
-  padding: 1.6rem;
-  border-radius: 1.9rem;
-  background: #1b2f1a;
+  padding: 2rem;
+  border-radius: 2.5rem;
+  background: rgba(20, 36, 19, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(200, 232, 125, 0.15);
   color: #f6f2e7;
-  box-shadow: 0 22px 48px rgba(15, 26, 11, 0.22);
+  box-shadow: 0 28px 64px rgba(10, 18, 7, 0.3), inset 0 2px 0 rgba(255,255,255,0.05);
 }
 
 .order-summary .section-kicker {

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import blogPosts from './blogPosts.js'
 import './BlogPage.css'
 
@@ -18,10 +19,10 @@ export default function BlogPage({ slug }) {
   return (
     <div className="blog-page">
       <header className="blog-header">
-        <a className="brand" href="/" aria-label="Sprig & Soil home">
+        <Link className="brand" to="/" aria-label="Sprig & Soil home">
           <span className="brand-mark" aria-hidden="true"></span>
           <span>Sprig & Soil</span>
-        </a>
+        </Link>
       </header>
 
       <main className="blog-main">
@@ -77,7 +78,7 @@ export default function BlogPage({ slug }) {
           </div>
 
           <div className="blog-footer-nav">
-            <a href="/">← Back to Sprig & Soil home</a>
+            <Link to="/">← Back to Sprig & Soil home</Link>
           </div>
         </article>
       </main>
