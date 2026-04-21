@@ -144,7 +144,7 @@ function createOrderHref(items, selectedPlan, subject) {
     .join('\n')
 
   const message = `${subject}\n\n${orderBody}`
-  return `https://wa.me/917306523297?text=${encodeURIComponent(message)}`
+  return `https://wa.me/916282652286?text=${encodeURIComponent(message)}`
 }
 
 function App() {
@@ -198,7 +198,7 @@ function App() {
 
           <a
             className="nav-cta"
-            href="https://wa.me/917306523297?text=Hi%2C%20I%20want%20to%20order%20Sprig%20%26%20Soil%20microgreens"
+            href="https://wa.me/916282652286?text=Hi%2C%20I%20want%20to%20order%20Sprig%20%26%20Soil%20microgreens"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -220,7 +220,7 @@ function App() {
             <div className="hero-actions">
               <a
                 className="button button-primary"
-                href="https://wa.me/917306523297?text=Hi%2C%20I%20want%20to%20subscribe%20weekly%20for%20microgreens"
+                href="https://wa.me/916282652286?text=Hi%2C%20I%20want%20to%20subscribe%20weekly%20for%20microgreens"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -566,7 +566,7 @@ function App() {
 
       {/* Floating WhatsApp CTA */}
       <a
-        href="https://wa.me/917306523297?text=Hi%2C%20I%20want%20to%20subscribe%20to%20Sprig%20%26%20Soil%20microgreens"
+        href="https://wa.me/916282652286?text=Hi%2C%20I%20want%20to%20subscribe%20to%20Sprig%20%26%20Soil%20microgreens"
         className="whatsapp-float"
         target="_blank"
         rel="noopener noreferrer"

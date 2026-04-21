@@ -120,7 +120,7 @@ export default function LocationPage({ location }) {
             </p>
             <a
               className="button button-primary"
-              href={`https://wa.me/917306523297?text=${data.whatsappText}`}
+              href={`https://wa.me/916282652286?text=${data.whatsappText}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -141,7 +141,7 @@ export default function LocationPage({ location }) {
       </main>
 
       <a
-        href={`https://wa.me/917306523297?text=${data.whatsappText}`}
+        href={`https://wa.me/916282652286?text=${data.whatsappText}`}
         className="whatsapp-float"
         target="_blank"
         rel="noopener noreferrer"

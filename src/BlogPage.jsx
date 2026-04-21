@@ -78,7 +78,7 @@ export default function BlogPage() {
             </p>
             <a
               className="button button-primary"
-              href="https://wa.me/917306523297?text=Hi%2C%20I%20found%20your%20blog%20and%20want%20to%20try%20your%20microgreens"
+              href="https://wa.me/916282652286?text=Hi%2C%20I%20found%20your%20blog%20and%20want%20to%20try%20your%20microgreens"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -93,7 +93,7 @@ export default function BlogPage() {
       </main>
 
       <a
-        href="https://wa.me/917306523297?text=Hi%2C%20I%20found%20your%20blog%20and%20want%20to%20try%20your%20microgreens"
+        href="https://wa.me/916282652286?text=Hi%2C%20I%20found%20your%20blog%20and%20want%20to%20try%20your%20microgreens"
         className="whatsapp-float"
         target="_blank"
         rel="noopener noreferrer"

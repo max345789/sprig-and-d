@@ -25,7 +25,7 @@ const PAGE_LINKS = [
 ]
 
 function createWhatsAppHref(text) {
-  return `https://wa.me/917306523297?text=${encodeURIComponent(text)}`
+  return `https://wa.me/916282652286?text=${encodeURIComponent(text)}`
 }
 
 function SiteHeader() {
