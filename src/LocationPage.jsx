@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './LocationPage.css'
+import { useSeo } from './seo.js'
 
 const locationData = {
   'pattambi': {
@@ -67,10 +67,17 @@ const locationData = {
 
 export default function LocationPage({ location }) {
   const data = locationData[location]
+  const locationLabel = location.charAt(0).toUpperCase() + location.slice(1)
 
-  useEffect(() => {
-    document.title = `Fresh Microgreens Delivery in ${location.charAt(0).toUpperCase() + location.slice(1)} | Sprig & Soil`
-  }, [location])
+  useSeo({
+    title: data
+      ? `Fresh Microgreens Delivery in ${locationLabel} | Sprig & Soil`
+      : 'Microgreens Delivery in Kerala | Sprig & Soil',
+    description: data
+      ? `Order fresh microgreens in ${locationLabel} with weekly doorstep delivery from Sprig & Soil. Harvested to order and delivered across local areas.`
+      : 'Sprig & Soil delivers fresh microgreens weekly in Pattambi, Valanchery, Pallipuram, and Pulamanthole.',
+    path: data ? `/microgreens-${location}` : '/',
+  })
 
   if (!data) return null
 

@@ -31,12 +31,18 @@
 }
 
 html {
+  height: 100%;
   scroll-padding-top: 24px;
+  overscroll-behavior-y: none;
 }
 
 body {
   margin: 0;
+  min-height: 100%;
   min-width: 320px;
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
   background:
     radial-gradient(circle at top, rgba(212, 235, 194, 0.4), transparent 24%),
     linear-gradient(180deg, #f5f1e7 0%, #f7f4ec 42%, #f2ede0 100%);
@@ -79,6 +85,7 @@ p {
 
 #root {
   min-height: 100svh;
+  overflow-x: clip;
 }
 
 a:focus-visible,

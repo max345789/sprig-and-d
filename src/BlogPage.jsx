@@ -1,9 +1,18 @@
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import blogPosts from './blogPosts.js'
 import './BlogPage.css'
+import { useSeo } from './seo.js'
 
-export default function BlogPage({ slug }) {
+export default function BlogPage() {
+  const { slug } = useParams()
   const post = blogPosts[slug]
+
+  useSeo({
+    title: post ? `${post.title} | Sprig & Soil Blog` : 'Blog Post Not Found | Sprig & Soil',
+    description: post ? post.excerpt : 'The requested blog post could not be found.',
+    path: post ? `/blog/${post.slug}` : '/blog',
+    ogType: post ? 'article' : 'website',
+  })
 
   if (!post) {
     return (

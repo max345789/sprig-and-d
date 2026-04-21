@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './App.css'
+import { useSeo } from './seo.js'
 
 const products = [
   {
@@ -142,18 +143,20 @@ function createOrderHref(items, selectedPlan, subject) {
     .filter(Boolean)
     .join('\n')
 
-  return `mailto:orders@sprigandsoil.com?subject=${encodeURIComponent(
-    subject,
-  )}&body=${encodeURIComponent(orderBody)}`
+  const message = `${subject}\n\n${orderBody}`
+  return `https://wa.me/917306523297?text=${encodeURIComponent(message)}`
 }
 
 function App() {
   const [quantities, setQuantities] = useState(initialQuantities)
   const [plan, setPlan] = useState('weekly')
 
-  useEffect(() => {
-    document.title = 'Sprig & Soil | Microgreens for Daily Energy and Flavor'
-  }, [])
+  useSeo({
+    title: 'Fresh Microgreens Delivery in Kerala | Sprig & Soil',
+    description:
+      'Order fresh microgreens in Pattambi, Valanchery, Pallipuram, and Pulamanthole. Weekly harvest-to-door delivery and direct WhatsApp ordering.',
+    path: '/',
+  })
 
   const selectedItems = products
     .filter((product) => quantities[product.id] > 0)
@@ -188,13 +191,18 @@ function App() {
           </Link>
 
           <nav className="site-nav" aria-label="Primary">
-            <a href="#areas">Delivery Areas</a>
-            <a href="#shop">Shop</a>
-            <a href="#faq">FAQ</a>
+            <Link to="/delivery-areas">Delivery Areas</Link>
+            <Link to="/shop">Shop</Link>
+            <Link to="/faq">FAQ</Link>
           </nav>
 
-          <a className="nav-cta" href="#shop">
-            Order Microgreens
+          <a
+            className="nav-cta"
+            href="https://wa.me/917306523297?text=Hi%2C%20I%20want%20to%20order%20Sprig%20%26%20Soil%20microgreens"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Order on WhatsApp
           </a>
         </header>
 
@@ -210,12 +218,15 @@ function App() {
             </p>
 
             <div className="hero-actions">
-              <a className="button button-primary" href="#shop">
+              <a
+                className="button button-primary"
+                href="https://wa.me/917306523297?text=Hi%2C%20I%20want%20to%20subscribe%20weekly%20for%20microgreens"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Subscribe Weekly
               </a>
-              <a className="button button-secondary" href="#benefits">
-                See Why They Work
-              </a>
+              <Link className="button button-secondary" to="/benefits">See Why They Work</Link>
             </div>
 
             <ul className="hero-proof" aria-label="Key proof points">

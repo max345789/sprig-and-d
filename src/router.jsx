@@ -1,7 +1,16 @@
-import { createBrowserRouter, RouterProvider, Outlet, Link, useLocation } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
 import App from './App.jsx'
 import LocationPage from './LocationPage.jsx'
 import BlogPage from './BlogPage.jsx'
+import {
+  BenefitsPage,
+  DeliveryAreasPage,
+  AboutMicrogreensPage,
+  ShopPage,
+  HowItWorksPage,
+  TestimonialsPage,
+  FaqPage,
+} from './SectionPages.jsx'
 import './index.css'
 
 function Layout() {
@@ -23,6 +32,13 @@ const router = createBrowserRouter([
       { path: 'microgreens-pallipuram', element: <LocationPage location="pallipuram" /> },
       { path: 'microgreens-pulamanthole', element: <LocationPage location="pulamanthole" /> },
       { path: 'blog/:slug', element: <BlogPage /> },
+      { path: 'benefits', element: <BenefitsPage /> },
+      { path: 'delivery-areas', element: <DeliveryAreasPage /> },
+      { path: 'about-microgreens', element: <AboutMicrogreensPage /> },
+      { path: 'shop', element: <ShopPage /> },
+      { path: 'how-it-works', element: <HowItWorksPage /> },
+      { path: 'testimonials', element: <TestimonialsPage /> },
+      { path: 'faq', element: <FaqPage /> },
     ],
   },
 ])
