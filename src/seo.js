@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-const SITE_URL = 'https://sprigandsoil.in'
+const SITE_URL = 'https://dabcloud.in'
 
 function upsertMeta(name, content, attr = 'name') {
   const selector = `meta[${attr}="${name}"]`
@@ -13,7 +13,26 @@ function upsertMeta(name, content, attr = 'name') {
   tag.setAttribute('content', content)
 }
 
-export function useSeo({ title, description, path = '/', ogType = 'website' }) {
+function upsertJsonLd(id, schemaObj) {
+  const scriptId = `jsonld-${id}`
+  let script = document.getElementById(scriptId)
+  if (!script) {
+    script = document.createElement('script')
+    script.id = scriptId
+    script.type = 'application/ld+json'
+    document.head.appendChild(script)
+  }
+  script.textContent = JSON.stringify(schemaObj)
+}
+
+function removeJsonLd(id) {
+  const script = document.getElementById(`jsonld-${id}`)
+  if (script) {
+    script.remove()
+  }
+}
+
+export function useSeo({ title, description, path = '/', ogType = 'website', schema = null, schemaId = 'default' }) {
   useEffect(() => {
     const normalizedPath = path.startsWith('/') ? path : `/${path}`
     const canonical = `${SITE_URL}${normalizedPath}`
@@ -34,5 +53,15 @@ export function useSeo({ title, description, path = '/', ogType = 'website' }) {
       document.head.appendChild(canonicalTag)
     }
     canonicalTag.setAttribute('href', canonical)
-  }, [title, description, path, ogType])
+
+    if (schema) {
+      upsertJsonLd(schemaId, schema)
+    }
+
+    return () => {
+      if (schema) {
+        removeJsonLd(schemaId)
+      }
+    }
+  }, [title, description, path, ogType, schema, schemaId])
 }

@@ -1,45 +1,25 @@
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
-import LocationPage from './LocationPage.jsx'
-import BlogPage from './BlogPage.jsx'
-import {
-  BenefitsPage,
-  DeliveryAreasPage,
-  AboutMicrogreensPage,
-  ShopPage,
-  HowItWorksPage,
-  TestimonialsPage,
-  FaqPage,
-} from './SectionPages.jsx'
+import Home from './pages/Home.jsx'
+import ProductPage from './pages/ProductPage.jsx'
+import SubscribePage from './pages/SubscribePage.jsx'
+import ShopPage from './pages/ShopPage.jsx'
+import WhyPage from './pages/WhyPage.jsx'
+import FaqPage from './pages/FaqPage.jsx'
 import './index.css'
 
-function Layout() {
-  return (
-    <>
-      <Outlet />
-    </>
-  )
-}
-
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Layout />,
+  { 
+    path: '/', 
+    element: <App />,
     children: [
-      { index: true, element: <App /> },
-      { path: 'microgreens-pattambi', element: <LocationPage location="pattambi" /> },
-      { path: 'microgreens-valanchery', element: <LocationPage location="valanchery" /> },
-      { path: 'microgreens-pallipuram', element: <LocationPage location="pallipuram" /> },
-      { path: 'microgreens-pulamanthole', element: <LocationPage location="pulamanthole" /> },
-      { path: 'blog/:slug', element: <BlogPage /> },
-      { path: 'benefits', element: <BenefitsPage /> },
-      { path: 'delivery-areas', element: <DeliveryAreasPage /> },
-      { path: 'about-microgreens', element: <AboutMicrogreensPage /> },
-      { path: 'shop', element: <ShopPage /> },
-      { path: 'how-it-works', element: <HowItWorksPage /> },
-      { path: 'testimonials', element: <TestimonialsPage /> },
-      { path: 'faq', element: <FaqPage /> },
-    ],
+      { path: '/', element: <Home /> },
+      { path: '/shop', element: <ShopPage /> },
+      { path: '/shop/:productId', element: <ProductPage /> },
+      { path: '/subscribe', element: <SubscribePage /> },
+      { path: '/why', element: <WhyPage /> },
+      { path: '/faq', element: <FaqPage /> }
+    ]
   },
 ])
 
