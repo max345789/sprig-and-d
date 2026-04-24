@@ -24,9 +24,9 @@ export async function createPaymentLink(order) {
       currency: 'INR',
       accept_partial: false,
       reference_id: order.id,
-      description: `Dabcloud order ${order.id}`,
+      description: `Sprig and Soil order ${order.id}`,
       customer: {
-        name: order.customer.name || 'Dabcloud Customer',
+        name: order.customer.name || 'Sprig and Soil Customer',
         contact: order.waId.replace(/\D/g, ''),
       },
       notify: {
