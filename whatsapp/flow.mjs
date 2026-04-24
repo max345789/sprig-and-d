@@ -80,7 +80,7 @@ function showMainMenu(session) {
   session.step = 'main_menu'
   return [
     buttons(
-      'Welcome to Dabcloud. I can help you place an order, start a subscription, or track your order.',
+      'Welcome to Sprig and Soil. I can help you place an order, start a subscription, or track your order.',
       MAIN_MENU_BUTTONS
     ),
   ]
