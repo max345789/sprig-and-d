@@ -9,7 +9,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "whatsapp:start": "node whatsapp/server.mjs"
   },
   "dependencies": {
     "dotenv": "^17.2.3",

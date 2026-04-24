@@ -5,3 +5,29 @@ services:
     buildCommand: npm ci && npm run build
     staticPublishPath: ./dist
     pullRequestPreviewsEnabled: true
+
+  - type: web
+    name: sprig-and-soil-whatsapp
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm run whatsapp:start
+    envVars:
+      - key: WHATSAPP_API_VERSION
+        value: v25.0
+      - key: WHATSAPP_PHONE_NUMBER_ID
+        value: 1113322531867201
+      - key: WHATSAPP_BUSINESS_ACCOUNT_ID
+        value: 1931493854238377
+      - key: WHATSAPP_VERIFY_TOKEN
+        sync: false
+      - key: WHATSAPP_ACCESS_TOKEN
+        sync: false
+      - key: WHATSAPP_SUPPORT_NUMBER
+        value: "+916282652286"
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: RAZORPAY_WEBHOOK_SECRET
+        sync: false

@@ -13,6 +13,7 @@ dist-ssr
 .env
 .chrome-agent-profile
 agent-output
+.data
 *.local
 
 # Editor directories and files
