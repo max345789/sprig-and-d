@@ -1,8 +1,10 @@
 import { getSession, getLatestOrderForWaId, getOrder, saveOrder, saveSession, updateOrder } from './store.mjs'
-import { fmt } from './catalog.mjs'
+import { fmt, formatItems } from './catalog.mjs'
 import { processIncoming, summarizeCodSwitch, summarizePaidOrder } from './flow.mjs'
 import { createPaymentLink, isRazorpayConfigured, verifyRazorpaySignature } from './razorpay.mjs'
 import { isWhatsAppConfigured, sendButtonsMessage, sendTextMessage } from './whatsapp-api.mjs'
+
+const ADMIN_ORDER_NUMBER = process.env.WHATSAPP_ADMIN_ORDER_NUMBER || process.env.WHATSAPP_SUPPORT_NUMBER || ''
 
 function extractIncomingEntries(payload) {
   const entries = []
@@ -81,6 +83,7 @@ async function dispatchOutgoingActions(waId, actions) {
 async function handleInternalAction(session, action) {
   if (action.type === 'create_order') {
     saveOrder(action.order)
+    await notifyAdminNewOrder(action.order)
 
     if (!action.createPaymentLink) {
       return []
@@ -177,6 +180,30 @@ async function handleInternalAction(session, action) {
   }
 
   return []
+}
+
+async function notifyAdminNewOrder(order) {
+  if (!isWhatsAppConfigured() || !ADMIN_ORDER_NUMBER || ADMIN_ORDER_NUMBER === order.waId) {
+    return
+  }
+
+  await sendTextMessage(
+    ADMIN_ORDER_NUMBER.replace(/[^\d]/g, ''),
+    [
+      `New WhatsApp order: ${order.id}`,
+      `Customer: ${order.customer.name}`,
+      `WhatsApp: +${order.waId}`,
+      `Call: ${order.customer.phone}`,
+      `Area: ${order.customer.area}`,
+      `Address: ${order.customer.address}`,
+      `Items:`,
+      formatItems(order.items),
+      `Total: ${fmt(order.total)}`,
+      `Payment: ${order.paymentMethod}`,
+      `Delivery: ${order.deliveryDay || 'Next available'}`,
+      `Note: ${order.deliveryNote || 'No note'}`,
+    ].join('\n')
+  )
 }
 
 export async function processIncomingMessage(event) {

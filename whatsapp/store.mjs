@@ -48,6 +48,7 @@ function buildSession(waId, profileName = '') {
       name: profileName || '',
       area: '',
       address: '',
+      phone: '',
     },
     orderType: '',
     cart: [],

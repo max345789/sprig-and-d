@@ -72,6 +72,10 @@ function resetFlow(session) {
   session.activeOrderId = ''
 }
 
+function hasCustomerDetails(session) {
+  return session.profile.name && session.profile.area && session.profile.address && session.profile.phone
+}
+
 function showMainMenu(session) {
   session.step = 'main_menu'
   return [
@@ -98,6 +102,7 @@ function summarizeOrder(order) {
     `Total: ${fmt(order.total)}`,
     `Payment: ${order.paymentMethod}`,
     `Delivery day: ${order.deliveryDay || 'Next available'}`,
+    `Phone: ${order.customer.phone}`,
     `Address: ${order.customer.address}`,
   ].join('\n')
 }
@@ -140,6 +145,7 @@ function buildOrder(session, overrides = {}) {
       name: session.profile.name,
       area: session.profile.area,
       address: session.profile.address,
+      phone: session.profile.phone,
     },
     createdAt: new Date().toISOString(),
   }
@@ -154,7 +160,7 @@ function beginOrder(session) {
   session.deliveryNote = ''
   session.paymentMethod = ''
 
-  if (session.profile.name && session.profile.area && session.profile.address) {
+  if (hasCustomerDetails(session)) {
     session.step = 'awaiting_order_type'
     return [
       buttons(
@@ -175,7 +181,7 @@ function beginSubscription(session) {
   session.deliveryNote = ''
   session.paymentMethod = ''
 
-  if (session.profile.name && session.profile.area && session.profile.address) {
+  if (hasCustomerDetails(session)) {
     session.step = 'awaiting_subscription_plan'
     return [buttons('Choose your weekly subscription plan.', getSubscriptionButtons())]
   }
@@ -247,6 +253,17 @@ function handleAddress(session, input) {
   }
 
   session.profile.address = address
+  session.step = 'awaiting_phone'
+  return [text('Please send the phone number we can call for delivery or order confirmation.')]
+}
+
+function handlePhone(session, input) {
+  const phone = input.text.replace(/[^\d+]/g, '').trim()
+  if (phone.length < 10) {
+    return [text('Please send a valid phone number with at least 10 digits.')]
+  }
+
+  session.profile.phone = phone
 
   if (session.mode === 'subscription') {
     session.step = 'awaiting_subscription_plan'
@@ -518,6 +535,8 @@ export function processIncoming(session, input, latestOrder) {
       return handleArea(session, input)
     case 'awaiting_address':
       return handleAddress(session, input)
+    case 'awaiting_phone':
+      return handlePhone(session, input)
     case 'awaiting_order_type':
       return handleOrderType(session, input)
     case 'awaiting_product':
