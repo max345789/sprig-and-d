@@ -1,4 +1,4 @@
-import { getSession, getLatestOrderForWaId, getOrder, saveOrder, saveSession, updateOrder } from './store.mjs'
+import { getSession, getLatestOrderForWaId, getOrder, listRecentOrders, saveOrder, saveSession, updateOrder } from './store.mjs'
 import { fmt, formatItems } from './catalog.mjs'
 import { processIncoming, summarizeCodSwitch, summarizePaidOrder } from './flow.mjs'
 import { createPaymentLink, isRazorpayConfigured, verifyRazorpaySignature } from './razorpay.mjs'
@@ -304,4 +304,50 @@ export function getHealthSnapshot() {
     phoneNumberIdSet: Boolean(process.env.WHATSAPP_PHONE_NUMBER_ID),
     supportNumber: process.env.WHATSAPP_SUPPORT_NUMBER || '',
   }
+}
+
+export function getRecentOrders(limit = 50) {
+  return listRecentOrders(limit)
+}
+
+export function getRecentOrdersCsv(limit = 100) {
+  const rows = listRecentOrders(limit)
+  const headers = [
+    'order_id',
+    'created_at',
+    'customer_name',
+    'whatsapp',
+    'call_number',
+    'area',
+    'address',
+    'items',
+    'total',
+    'payment_method',
+    'payment_status',
+    'delivery_day',
+    'delivery_note',
+    'status',
+  ]
+
+  const escape = (value = '') => `"${String(value).replaceAll('"', '""')}"`
+  const csvRows = rows.map((order) =>
+    [
+      order.id,
+      order.createdAt,
+      order.customer?.name,
+      order.waId,
+      order.customer?.phone,
+      order.customer?.area,
+      order.customer?.address,
+      formatItems(order.items || []).replaceAll('\n', ' | '),
+      order.total,
+      order.paymentMethod,
+      order.paymentStatus,
+      order.deliveryDay,
+      order.deliveryNote,
+      order.status,
+    ].map(escape).join(',')
+  )
+
+  return [headers.join(','), ...csvRows].join('\n')
 }

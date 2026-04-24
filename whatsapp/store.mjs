@@ -122,3 +122,10 @@ export function getLatestOrderForWaId(waId) {
 
   return orders[0] ?? null
 }
+
+export function listRecentOrders(limit = 50) {
+  const store = loadStore()
+  return Object.values(store.orders)
+    .sort((left, right) => new Date(right.createdAt) - new Date(left.createdAt))
+    .slice(0, limit)
+}

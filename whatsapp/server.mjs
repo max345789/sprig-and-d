@@ -1,6 +1,13 @@
 import 'dotenv/config'
 import { createServer } from 'http'
-import { getHealthSnapshot, handleRazorpayWebhook, processIncomingWebhook, simulateIncoming } from './service.mjs'
+import {
+  getHealthSnapshot,
+  getRecentOrders,
+  getRecentOrdersCsv,
+  handleRazorpayWebhook,
+  processIncomingWebhook,
+  simulateIncoming,
+} from './service.mjs'
 
 const PORT = Number.parseInt(process.env.PORT || process.env.WHATSAPP_PORT || '4000', 10)
 
@@ -12,6 +19,15 @@ function sendJson(response, statusCode, payload) {
 function sendText(response, statusCode, payload) {
   response.writeHead(statusCode, { 'Content-Type': 'text/plain; charset=utf-8' })
   response.end(payload)
+}
+
+function isAdminRequest(request, url) {
+  const adminKey = process.env.ADMIN_ORDERS_KEY
+  if (!adminKey) {
+    return false
+  }
+
+  return request.headers['x-admin-key'] === adminKey || url.searchParams.get('key') === adminKey
 }
 
 async function parseRequestBody(request) {
@@ -32,6 +48,24 @@ createServer(async (request, response) => {
   try {
     if (request.method === 'GET' && url.pathname === '/health') {
       return sendJson(response, 200, getHealthSnapshot())
+    }
+
+    if (request.method === 'GET' && url.pathname === '/admin/orders') {
+      if (!isAdminRequest(request, url)) {
+        return sendJson(response, 401, { ok: false, error: 'Unauthorized' })
+      }
+
+      const limit = Number.parseInt(url.searchParams.get('limit') || '50', 10)
+      return sendJson(response, 200, { ok: true, orders: getRecentOrders(limit) })
+    }
+
+    if (request.method === 'GET' && url.pathname === '/admin/orders.csv') {
+      if (!isAdminRequest(request, url)) {
+        return sendText(response, 401, 'Unauthorized')
+      }
+
+      const limit = Number.parseInt(url.searchParams.get('limit') || '100', 10)
+      return sendText(response, 200, getRecentOrdersCsv(limit))
     }
 
     if (request.method === 'GET' && url.pathname === '/webhook') {
